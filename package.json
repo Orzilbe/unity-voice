@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "openai": "^4.91.1"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}
