@@ -73,3 +73,25 @@ export interface Word {
   exampleUsage: string;   // דוגמת שימוש במילה
   pronunciation: string;  // איך להגות את המילה (כתיב פונטי או קישור להקלטה)
 }
+// טיפוסים אפשריים למשימה
+export enum TaskType {
+  QUIZ = "quiz",
+  WORD = "word",
+  INTERACTIVE_SESSION = "interactiveSession",
+  POST = "post",
+  VOCABULARY = "vocabulary",
+  LISTENING = "listening",
+  SPEAKING = "speaking",
+  GRAMMAR = "grammar",
+  WRITING = "writing"
+}
+// טיפוס למשימה
+export interface Task {
+  id?: string;              // מזהה ייחודי של המשימה
+  taskScore: number;        // ניקוד המשימה
+  taskType: TaskType;       // סוג המשימה
+  completionDate?: Date;    // תאריך סיום (אופציונלי, אם המשימה הושלמה)
+  durationTask: number;     // משך זמן המשימה (בדקות)
+  userId: string;           // מזהה המשתמש שהמשימה שייכת אליו
+  words?: string[];         // מזהים של מילים הקשורות למשימה (אם רלוונטי)
+}
