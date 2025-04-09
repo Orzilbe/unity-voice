@@ -167,3 +167,92 @@ export interface Test {
   userId: string;          // מזהה המשתמש שביצע את המבחן
   questions?: string[];    // מזהים של שאלות במבחן
 }
+// טיפוס לנושא (Topic)
+export interface Topic {
+  id?: string;         // מזהה ייחודי של הנושא
+  topicName: string;   // שם הנושא
+  icon?: string;       // קישור לאייקון של הנושא
+  levels?: Level[];    // רמות הקשורות לנושא
+}
+
+// טיפוס לרמה (Level)
+export interface Level {
+  id?: string;         // מזהה ייחודי של הרמה
+  levelScore: number;  // ניקוד הרמה
+  topicId: string;     // מזהה הנושא שהרמה שייכת אליו
+  tasks?: string[];    // מזהים של משימות ברמה זו
+}
+
+// טיפוס לתוצאות המבחן
+export interface TestResult {
+  id?: string;         // מזהה ייחודי של תוצאת המבחן
+  testId: string;      // מזהה המבחן
+  userId: string;      // מזהה המשתמש
+  score: number;       // ציון
+  feedback?: string;   // משוב מפורט על המבחן
+  completedAt: Date;   // תאריך השלמה
+}
+
+// טיפוס להתקדמות משתמש
+export interface UserProgress {
+  userId: string;            // מזהה המשתמש
+  currentLevel?: string;     // מזהה הרמה הנוכחית
+  completedLevels: string[]; // מזהים של רמות שהושלמו
+  completedTasks: string[];  // מזהים של משימות שהושלמו
+  totalScore: number;        // סך כל הנקודות שנצברו
+  lastActive: Date;          // תאריך פעילות אחרונה
+}
+
+// טיפוס לסטטיסטיקות משתמש
+export interface UserStats {
+  userId: string;              // מזהה המשתמש
+  wordsLearned: number;        // מספר מילים שנלמדו
+  sessionsCompleted: number;   // מספר סשנים שהושלמו
+  tasksCompleted: number;      // מספר משימות שהושלמו
+  averageScore: number;        // ציון ממוצע
+  totalTimeSpent: number;      // סך זמן שבילה במערכת (בדקות)
+  lastUpdateDate: Date;        // תאריך עדכון אחרון
+}
+
+// טיפוס לתגי הישגים
+export interface Achievement {
+  id: string;                  // מזהה ייחודי של ההישג
+  name: string;                // שם ההישג
+  description: string;         // תיאור ההישג
+  iconUrl: string;             // קישור לאייקון של ההישג
+  requiredScore: number;       // ניקוד נדרש להשגה
+  usersAchieved: string[];     // מזהים של משתמשים שהשיגו
+}
+
+// מבנה בקשת התחברות
+export interface LoginRequest {
+  email: string;               // אימייל לצורך התחברות
+  password: string;            // סיסמה
+}
+
+// מבנה תגובת התחברות
+export interface LoginResponse {
+  user: UserResponse;          // פרטי המשתמש (ללא סיסמה)
+  token: string;               // טוקן JWT לאימות
+  expiresAt: Date;             // מועד פקיעת התוקף של הטוקן
+}
+
+// מבנה בקשת הרשמה
+export interface RegisterRequest {
+  email: string;               // אימייל
+  firstName: string;           // שם פרטי
+  lastName: string;            // שם משפחה
+  password: string;            // סיסמה
+  phoneNumber?: string;        // מספר טלפון (אופציונלי)
+  ageRange: AgeRange;          // טווח גילאים
+  englishLevel: EnglishLevel;  // רמת אנגלית
+  profilePicture?: string;     // תמונת פרופיל (אופציונלי)
+}
+
+// מבנה תשובות API כללי
+export interface ApiResponse<T> {
+  success: boolean;            // האם הבקשה הצליחה
+  data?: T;                    // נתוני תוצאה (אופציונלי)
+  error?: string;              // הודעת שגיאה (אופציונלי)
+  message?: string;            // הודעה כללית (אופציונלי)
+}
