@@ -119,3 +119,11 @@ export interface InteractiveSession {
   endedAt?: Date;           // זמן סיום הסשן (אופציונלי, אם הסשן הסתיים)
   questions?: string[];     // מערך של מזהי שאלות הקשורות לסשן
 }
+// טיפוס לשאלה
+export interface Question {
+  id?: string;          // מזהה ייחודי של השאלה
+  questionText: string; // טקסט השאלה
+  answerText: string;   // טקסט התשובה
+  feedback?: string;    // משוב על התשובה (אופציונלי)
+  sessionId?: string;   // מזהה של סשן אינטראקטיבי קשור (אם רלוונטי)
+}
