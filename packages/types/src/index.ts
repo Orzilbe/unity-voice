@@ -148,3 +148,22 @@ export interface Comment {
   createdAt: Date;         // תאריך יצירת התגובה
   updatedAt?: Date;        // תאריך עדכון התגובה (אופציונלי)
 }
+// סוגי מבחנים אפשריים
+export enum TestType {
+  PLACEMENT = "placement",        // מבחן רמה ראשוני
+  PROGRESS = "progress",          // מבחן התקדמות
+  VOCABULARY = "vocabulary",      // מבחן אוצר מילים
+  GRAMMAR = "grammar",            // מבחן דקדוק
+  COMPREHENSION = "comprehension" // מבחן הבנת הנקרא
+}
+
+// טיפוס למבחן
+export interface Test {
+  id?: string;             // מזהה ייחודי של המבחן
+  testScore: number;       // ציון המבחן
+  testType: TestType;      // סוג המבחן
+  completionDate?: Date;   // תאריך השלמת המבחן
+  durationTest: number;    // משך זמן המבחן (בדקות)
+  userId: string;          // מזהה המשתמש שביצע את המבחן
+  questions?: string[];    // מזהים של שאלות במבחן
+}
