@@ -64,3 +64,12 @@ export interface UserResponse {
   createdAt: Date;
   lastLogin?: Date;
 }
+
+// טיפוס למילה
+export interface Word {
+  id?: string;            // מזהה ייחודי של המילה
+  word: string;           // המילה באנגלית
+  translation: string;    // תרגום המילה לעברית
+  exampleUsage: string;   // דוגמת שימוש במילה
+  pronunciation: string;  // איך להגות את המילה (כתיב פונטי או קישור להקלטה)
+}
