@@ -127,3 +127,24 @@ export interface Question {
   feedback?: string;    // משוב על התשובה (אופציונלי)
   sessionId?: string;   // מזהה של סשן אינטראקטיבי קשור (אם רלוונטי)
 }
+// טיפוס לפוסט
+export interface Post {
+  id?: string;          // מזהה ייחודי של הפוסט
+  postContent: string;  // תוכן הפוסט
+  picture?: string;     // קישור לתמונה (אופציונלי)
+  userId: string;       // מזהה המשתמש שיצר את הפוסט
+  createdAt: Date;      // תאריך יצירת הפוסט
+  updatedAt?: Date;     // תאריך עדכון הפוסט (אופציונלי)
+  comments?: Comment[]; // מערך תגובות לפוסט (אופציונלי)
+  taskId?: string;      // מזהה משימה קשורה (אם רלוונטי)
+}
+// טיפוס לתגובה
+export interface Comment {
+  id?: string;             // מזהה ייחודי של התגובה
+  commentContent: string;  // תוכן התגובה
+  feedback?: string;       // משוב על התגובה (אופציונלי)
+  userId: string;          // מזהה המשתמש שיצר את התגובה
+  postId: string;          // מזהה הפוסט שאליו התגובה שייכת
+  createdAt: Date;         // תאריך יצירת התגובה
+  updatedAt?: Date;        // תאריך עדכון התגובה (אופציונלי)
+}
