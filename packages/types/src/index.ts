@@ -95,3 +95,27 @@ export interface Task {
   userId: string;           // מזהה המשתמש שהמשימה שייכת אליו
   words?: string[];         // מזהים של מילים הקשורות למשימה (אם רלוונטי)
 }
+
+
+export enum SessionType {
+  // סוגי שיחות
+  PRESS_CONFERENCE = "pressConference",        // מענה לעיתונאים
+  DIPLOMATIC_CONVERSATION = "diplomaticConversation", // שיחות דיפלומטיות
+  DEBATE_PRESENTATION = "debatePresentation",   // הצגת עמדות בדיונים
+  CAMPUS_ADVOCACY = "campusAdvocacy",           // הסברה בקמפוסים
+  
+  // סוגים אחרים
+  PRONUNCIATION = "pronunciation",
+  VOCABULARY_PRACTICE = "vocabularyPractice",
+  GRAMMAR_PRACTICE = "grammarPractice",
+  LISTENING_COMPREHENSION = "listeningComprehension"
+}
+// טיפוס לסשן אינטראקטיבי
+export interface InteractiveSession {
+  id?: string;              // מזהה ייחודי של הסשן
+  sessionType: SessionType; // סוג הסשן
+  userId: string;           // מזהה המשתמש שהסשן שייך אליו
+  createdAt: Date;          // זמן יצירת הסשן
+  endedAt?: Date;           // זמן סיום הסשן (אופציונלי, אם הסשן הסתיים)
+  questions?: string[];     // מערך של מזהי שאלות הקשורות לסשן
+}
