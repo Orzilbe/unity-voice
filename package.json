@@ -17,9 +17,17 @@
     "dev:api": "turbo run dev --filter=api"
   },
   "devDependencies": {
-    "turbo": "^2.5.0"
+    "@types/node": "^22.14.0",
+    "ts-node": "^10.9.2",
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "openai": "^4.91.1"
-  }
+  },
+  "description": "A monorepo project for voice-based interface applications using Next.js, Express, and MongoDB.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
