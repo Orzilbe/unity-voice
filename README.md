@@ -1,3 +1,4 @@
+<!-- /c:/Users/orzil/unity-voice-2/README.md -->
 # unity-voice
 # Unity Voice
 
@@ -46,6 +47,8 @@ unity-voice/
 2. Install dependencies:
    ```bash
    npm install
+   npm install @azure/openai
+
    ```
 
 3. Set up environment variables:
@@ -68,6 +71,25 @@ unity-voice/
 5. Open your browser:
    - Frontend: [http://localhost:3000](http://localhost:3000)
    - Backend API: [http://localhost:5000](http://localhost:5000)
+
+### Additional Dependencies
+
+Install required packages:
+```bash
+# UI Icons and Components
+npm install lucide-react react-icons lucide
+
+# OpenAI Integration
+npm install openai
+```
+
+These packages provide:
+- `lucide-react`: Modern icon components for React
+- `react-icons`: Popular icon libraries
+- `lucide`: Base icon library
+- `openai`: Official OpenAI API client
+
+> **Note**: When using Azure OpenAI Service, the `openai` package should be configured with Azure endpoints.
 
 ## Development
 
@@ -118,3 +140,164 @@ See the deployment documentation for more details.
 ## License
 
 [MIT](LICENSE)
+
+# Unity Voice Platform
+
+A platform for English language learning and advocacy training.
+
+## System Architecture
+
+```
+Frontend (Next.js)          Backend (Express)
+     |                           |
+     |                           |
+     |  /api/auth/login          |
+     |-------------------------->|  /api/users/login
+     |                           |
+     |  Token in Cookie          |
+     |<--------------------------|  User Data + JWT
+     |                           |
+     |  Protected Routes         |
+     |-------------------------->|  Token Validation
+     |                           |
+     |  User Data                |
+     |<--------------------------|  Authorized Response
+```
+
+## Authentication Flow
+
+### Login API
+
+**Endpoint:** `/api/auth/login`
+
+**Request Method:** POST
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Success Response (200):**
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user_id",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "user@example.com"
+    }
+  }
+}
+```
+
+**Error Responses:**
+- 400: Invalid credentials
+- 500: Server error
+
+## Setup Instructions
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd apps/api
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with required variables:
+   ```env
+   PORT=5000
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   ```
+
+4. Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+The backend will run on `http://localhost:5000`
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+   ```bash
+   cd apps/web
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.local` file:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:5000
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Frontend-Backend Integration
+
+### API Communication
+
+- The frontend uses the `NEXT_PUBLIC_API_URL` environment variable to determine the backend URL
+- All API requests are proxied through Next.js API routes
+- CORS is handled by the backend using the `cors` middleware
+
+### Authentication
+
+1. User submits login credentials
+2. Frontend sends request to `/api/auth/login`
+3. Backend validates credentials and returns JWT token
+4. Token is stored in an HTTP-only cookie
+5. Subsequent requests include the token in the cookie
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Error: connect ECONNREFUSED ::1:5000**
+   - Cause: Backend server is not running
+   - Solution: Start the backend server using `npm run dev` in the `apps/api` directory
+
+2. **401 Unauthorized Errors**
+   - Cause: Invalid or expired token
+   - Solution: Clear browser cookies and log in again
+
+3. **500 Internal Server Error**
+   - Cause: Backend server error
+   - Solution: Check backend logs for detailed error message
+
+4. **CORS Errors**
+   - Cause: Frontend and backend origins don't match
+   - Solution: Ensure `NEXT_PUBLIC_API_URL` matches the backend URL
+
+## Environment Variables
+
+### Backend (.env)
+- `PORT`: Backend server port (default: 5000)
+- `MONGODB_URI`: MongoDB connection string
+- `JWT_SECRET`: Secret key for JWT token generation
+
+### Frontend (.env.local)
+- `NEXT_PUBLIC_API_URL`: Backend API URL (default: http://localhost:5000)
+
+## Security Considerations
+
+- JWT tokens are stored in HTTP-only cookies
+- Passwords are hashed using bcrypt
+- CORS is configured to only allow requests from the frontend origin
+- Environment variables are used for sensitive configuration
