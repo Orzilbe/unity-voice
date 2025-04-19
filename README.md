@@ -1,6 +1,5 @@
 <!-- /c:/Users/orzil/unity-voice-2/README.md -->
 # unity-voice
-# Unity Voice
 
 A monorepo project for voice-based interface applications using Next.js, Express, and MongoDB.
 
